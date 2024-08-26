@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserApi Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .tabs {
+            display: flex;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background: #ccc;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+            transition: background 0.3s;
+        }
+        .tab:hover {
+            background: #bbb;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 0 5px 5px 5px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tab.active {
+            background: #fff;
+            border-bottom: 1px solid #fff;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h1>UserApi Documentation</h1>
+
+<div class="tabs">
+    <div class="tab active" data-tab="initialization">Initialization</div>
+    <div class="tab" data-tab="message-methods">Message Methods</div>
+    <div class="tab" data-tab="guild-methods">Guild Methods</div>
+    <div class="tab" data-tab="member-methods">Member Methods</div>
+    <div class="tab" data-tab="role-methods">Role Methods</div>
+</div>
+
+<div id="initialization" class="tab-content active">
+    <h2>Initialization</h2>
+    <pre><code>__init__(self, token)</code></pre>
+    <p>Initializes the <code>UserApi</code> instance with the provided token and sets up the headers for API requests.</p>
+    <h4>Parameters:</h4>
+    <ul>
+        <li><strong>token</strong> (str): Your Discord bot or user token for authentication.</li>
+    </ul>
+</div>
+
+<div id="message-methods" class="tab-content">
+    <h2>Message Methods</h2>
+
+    <h3>sendMessage</h3>
+    <pre><code>sendMessage(self, message, channelID, replyID=None)</code></pre>
+    <p>Sends a message to a specified channel. Optionally replies to a specific message.</p>
+    <h4>Parameters:</h4>
+    <ul>
+        <li><strong>message</strong> (str): The content of the message to be sent.</li>
+        <li><strong>channelID</strong> (str): The ID of the channel where the message will be sent.</li>
+        <li><strong>replyID</strong> (str, optional): The ID of the message to reply to (if any).</li>
+    </ul>
+    <h4>Returns:</h4>
+    <p>Response object from the <code>requests.post</code> call.</p>
+
+    <h3>getMessages</h3>
+    <pre><code>getMessages(self, channelID, limit=50)</code></pre>
+    <p>Retrieves messages from a specified channel.</p>
+    <h4>Parameters:</h4>
+    <ul>
+        <li><strong>channelID</strong> (str): The ID of the channel from which messages will be retrieved.</li>
+        <li><strong>limit</strong> (int, optional): The number of messages to retrieve (default is 50).</li>
+    </ul>
+    <h4>Returns:</h4>
+    <p>A list of messages as <code>SimpleNamespace</code> objects.</p>
+
+    <!-- Add more message methods here -->
+
+</div>
+
+<div id="guild-methods" class="tab-content">
+    <h2>Guild Methods</h2>
+
+    <h3>getGuilds</h3>
+    <pre><code>getGuilds(self)</code></pre>
+    <p>Retrieves a list of guilds (servers) the user is part of.</p>
+    <h4>Returns:</h4>
+    <p>Response object from the <code>requests.get</code> call.</p>
+
+    <h3>getGuildInfo</h3>
+    <pre><code>getGuildInfo(self, guildID)</code></pre>
+    <p>Retrieves information about a specific guild.</p>
+    <h4>Parameters:</h4>
+    <ul>
+        <li><strong>guildID</strong> (str): The ID of the guild to retrieve information about.</li>
+    </ul>
+    <h4>Returns:</h4>
+    <p>Guild information as a <code>SimpleNamespace</code> object.</p>
+
+    <!-- Add more guild methods here -->
+
+</div>
+
+<div id="member-methods" class="tab-content">
+    <h2>Member Methods</h2>
+
+    <h3>kickMember</h3>
+    <pre><code>kickMember(self, guildID, userID)</code></pre>
+    <p>Kicks a member from a specified guild.</p>
+    <h4>Parameters:</h4>
+    <ul>
+        <li><strong>guildID</strong> (str): The ID of the guild where the member is.</li>
+        <li><strong>userID</strong> (str): The ID of the user to kick.</li>
+    </ul>
+    <h4>Returns:</h4>
+    <p>Response object from the <code>requests.delete</code> call.</p>
+
+    <h3>banMember</h3>
+    <pre><code>banMember(self, guildID, userID, reason=None)</code></pre>
+    <p>Bans a member from a specified guild.</p>
+    <h4>Parameters:</h4>
+    <ul>
+        <li><strong>guildID</strong> (str): The ID of the guild where the member is.</li>
+        <li><strong>userID</strong> (str): The ID of the user to ban.</li>
+        <li><strong>reason</strong> (str, optional): The reason for the ban.</li>
+    </ul>
+    <h4>Returns:</h4>
+    <p>Response object from the <code>requests.put</code> call.</p>
+
+    <!-- Add more member methods here -->
+
+</div>
+
+<div id="role-methods" class="tab-content">
+    <h2>Role Methods</h2>
+
+    <h3>createRole</h3>
+    <pre><code>createRole(self, guildID, name, permissions=0, color=0, hoist=False)</code></pre>
+    <p>Creates a new role in a specified guild.</p>
+    <h4>Parameters:</h4>
+    <ul>
+        <li><strong>guildID</strong> (str): The ID of the guild where the role will be created.</li>
+        <li><strong>name</strong> (str): The name of the role.</li>
+        <li><strong>permissions</strong> (int, optional): The permissions assigned to the role (default is 0).</li>
+        <li><strong>color</strong> (int, optional): The color of the role (default is 0).</li>
+        <li><strong>hoist</strong> (bool, optional): Whether the role is displayed separately in the member list (default is False).</li>
+    </ul>
+    <h4>Returns:</h4>
+    <p>Response object from the <code>requests.post</code> call.</p>
+
+    <!-- Add more role methods here -->
+
+</div>
+
+<script>
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(tc => tc.classList.remove('active'));
+
+            tab.classList.add('active');
+            document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+        });
+    });
+</script>
+
+</body>
+</html>
